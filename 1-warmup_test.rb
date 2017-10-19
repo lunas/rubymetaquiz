@@ -12,7 +12,7 @@ require 'minitest/pride'
 # Notes
 # -----
 #
-#   - Tip: Don't try to fix them all at once - start at the top.
+#   - Tip: Don't try to fix them all at once
 #   - Extending core classes is bad practice and can result in nasty side
 #     effects. This test is only here to help you reason about methods taking
 #     blocks and extending existing classes.
