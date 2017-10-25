@@ -37,7 +37,7 @@ class Dog
   end
 end
 
-class MagicTest < Minitest::Test
+class DslTest < Minitest::Test
   def setup
     @dog = Dog.new name: 'Fido', age: 7, breed: 'Border Collie'
   end
@@ -55,7 +55,7 @@ class MagicTest < Minitest::Test
     assert_equal 42, @dog.add(13, 29)
   end
 
-  def test_class_side
+  def test_class_method
     assert_equal 'DOGGO', Dog.name
   end
 

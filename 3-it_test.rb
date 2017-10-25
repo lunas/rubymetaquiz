@@ -10,9 +10,10 @@ require 'minitest/pride'
 #
 # You code stars here:
 
+
 # Your code ends here.
 
-class Cooldown < Minitest::Test
+class ItTest < Minitest::Test
   def test_it_block
     array = %w(foo Bar baz)
     the_character_b = 'b'

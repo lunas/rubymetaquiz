@@ -1,0 +1,17 @@
+Radi's highly opinionated answer to "What is metaprogramming?"
+--------------------------------------------------------------
+
+In Ruby, if metaprogramming is "writing code that manipulates language
+constructs at runtime", then metaprogramming is just programming in Ruby.
+
+It all boils down to understanding how method lookup works and how you can
+manipulate it, i.e.,
+
+1. What is "self" and how can you change it?
+  - "class", "def" keywords
+  - "class_eval", "instance_eval", "class << <whatever>",
+    "def <whatever>.methodname"
+
+2. Where does Ruby look for method definitions and how can you influence that?
+  - Object#ancestors to comprehend where Ruby will look
+  - Inheritance, monkey patching and method_missing

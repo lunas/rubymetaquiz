@@ -1,0 +1,23 @@
+- Intro
+  - What is metaprogramming?
+    - Writing code that writes codes?
+    - Writing code that manipulates language constructs at runtime?
+    - We'll see.
+
+- A simplified look at the Ruby object model and how Ruby looks up methods.
+  - Module#ancestors
+
+- Fix 1-warmup_test.rb
+
+- Class method lookup
+  - Singleton classes
+- self
+  - Method definitions
+  - Scope gates
+
+- Fix 2-dsl_test.rb
+
+- Health warnings
+  - The Metaprogramming Disease
+
+- Radi's highly opinionated answer to "What is metaprogramming?"

@@ -6,7 +6,8 @@ require 'minitest/pride'
 # -----
 #
 #   1. No use of aliases
-#   2. No use of #each, #select or other higher order functions
+#   2. No use of #each, #select or other higher order functions, i.e. only use
+#      for/while/until or recursion for iteration
 #
 #
 # Notes
@@ -23,7 +24,7 @@ require 'minitest/pride'
 
 # Your code ends here.
 
-class Warmup < Minitest::Test
+class WarmupTest < Minitest::Test
   def test_project_is_the_new_map
     array = ['hi', 'there']
     assert_equal ['HI', 'THERE'], array.project { |el| el.upcase }
