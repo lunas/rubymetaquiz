@@ -24,6 +24,20 @@ require 'minitest/pride'
 
 # Your code ends here.
 
+class Array
+
+  def project(&block)
+    tmp = []
+    for item in self do
+      tmp << block.call(items)
+    end
+
+    tmp
+  end
+
+end
+
+
 class WarmupTest < Minitest::Test
   def test_project_is_the_new_map
     array = ['hi', 'there']

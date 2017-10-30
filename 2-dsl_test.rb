@@ -1,6 +1,7 @@
 require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'pry'
 
 # Resources
 # ---------
@@ -16,6 +17,53 @@ require 'minitest/pride'
 
 
 # Your code ends here.
+
+module Magic
+
+  module ClassMethods
+
+    def prop(attr_name, attr_type, opts = {} )
+
+      options = ({readonly: false, default: ->{ nil }}).merge(opts)
+
+      define_method(attr_name) do
+        instance_variable_get("@#{attr_name}") || options[:default].call
+      end
+
+      define_method("#{attr_name}=") do |value|
+        if value.kind_of? attr_type
+          instance_variable_set("@#{attr_name}", value)
+        else
+          raise TypeError.new("#{value} is not an instance of #{attr_type}")
+        end
+      end
+
+      if options[:readonly]
+        private "#{attr_name}="
+      end
+    end
+
+    def method(method_name, &block)
+      define_method(method_name, &block)
+    end
+
+    def class_method(method_name, &block)
+      define_singleton_method(method_name) do
+        yield block
+      end
+    end
+  end
+
+  def self.included(klass)
+    klass.extend ClassMethods
+  end
+
+  def initialize(args = {})
+    args.each do |key, value|
+      send("#{key}=", value)
+    end
+  end
+end
 
 class Dog
   include Magic
@@ -35,7 +83,10 @@ class Dog
   class_method :name do
     'DOGGO'
   end
+
+
 end
+
 
 class DslTest < Minitest::Test
   def setup

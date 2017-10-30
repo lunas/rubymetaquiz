@@ -1,0 +1,42 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/f9e6e3c/
+Dog	2-dsl_test.rb	/^class Dog$/;"	c
+Dog	playground_test.rb	/^class Dog$/;"	c
+DslTest	2-dsl_test.rb	/^class DslTest < Minitest::Test$/;"	c
+EnumerableTest	5-enumerable_test.rb	/^class EnumerableTest < MiniTest::Test$/;"	c
+ItTest	3-it_test.rb	/^class ItTest < Minitest::Test$/;"	c
+RipIfelseTest	4-rip_ifelse_test.rb	/^class RipIfelseTest < Minitest::Test$/;"	c
+WarmupTest	1-warmup_test.rb	/^class WarmupTest < Minitest::Test$/;"	c
+setup	2-dsl_test.rb	/^  def setup$/;"	f	class:DslTest
+test_add	2-dsl_test.rb	/^  def test_add$/;"	f	class:DslTest
+test_all	5-enumerable_test.rb	/^  def test_all$/;"	f	class:EnumerableTest
+test_any	5-enumerable_test.rb	/^  def test_any$/;"	f	class:EnumerableTest
+test_bad_monkey	1-warmup_test.rb	/^  def test_bad_monkey$/;"	f	class:WarmupTest
+test_bark	2-dsl_test.rb	/^  def test_bark$/;"	f	class:DslTest
+test_chaining	4-rip_ifelse_test.rb	/^  def test_chaining$/;"	f	class:RipIfelseTest
+test_class_method	2-dsl_test.rb	/^  def test_class_method$/;"	f	class:DslTest
+test_collect	5-enumerable_test.rb	/^  def test_collect$/;"	f	class:EnumerableTest
+test_count	5-enumerable_test.rb	/^  def test_count$/;"	f	class:EnumerableTest
+test_default_value_for_props	2-dsl_test.rb	/^  def test_default_value_for_props$/;"	f	class:DslTest
+test_detect	5-enumerable_test.rb	/^  def test_detect$/;"	f	class:EnumerableTest
+test_drop	5-enumerable_test.rb	/^  def test_drop$/;"	f	class:EnumerableTest
+test_drop_while	5-enumerable_test.rb	/^  def test_drop_while$/;"	f	class:EnumerableTest
+test_each_cons	5-enumerable_test.rb	/^  def test_each_cons$/;"	f	class:EnumerableTest
+test_falseness	4-rip_ifelse_test.rb	/^  def test_falseness$/;"	f	class:RipIfelseTest
+test_filter_is_the_new_select	1-warmup_test.rb	/^  def test_filter_is_the_new_select$/;"	f	class:WarmupTest
+test_filter_is_the_new_select_2	1-warmup_test.rb	/^  def test_filter_is_the_new_select_2$/;"	f	class:WarmupTest
+test_if_false	4-rip_ifelse_test.rb	/^  def test_if_false$/;"	f	class:RipIfelseTest
+test_if_true	4-rip_ifelse_test.rb	/^  def test_if_true$/;"	f	class:RipIfelseTest
+test_it_block	3-it_test.rb	/^  def test_it_block$/;"	f	class:ItTest
+test_it_outside_block	3-it_test.rb	/^  def test_it_outside_block$/;"	f	class:ItTest
+test_no_redundancy	4-rip_ifelse_test.rb	/^  def test_no_redundancy$/;"	f	class:RipIfelseTest
+test_project_is_the_new_map	1-warmup_test.rb	/^  def test_project_is_the_new_map$/;"	f	class:WarmupTest
+test_readers	2-dsl_test.rb	/^  def test_readers$/;"	f	class:DslTest
+test_readonly_props	2-dsl_test.rb	/^  def test_readonly_props$/;"	f	class:DslTest
+test_truthiness	4-rip_ifelse_test.rb	/^  def test_truthiness$/;"	f	class:RipIfelseTest
+test_type_checking	2-dsl_test.rb	/^  def test_type_checking$/;"	f	class:DslTest
