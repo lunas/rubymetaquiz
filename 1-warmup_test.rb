@@ -21,22 +21,32 @@ require 'minitest/pride'
 #
 # You code stars here:
 
-
-# Your code ends here.
-
-class Array
+module ArrayOnSteroid
 
   def project(&block)
     tmp = []
     for item in self do
-      tmp << block.call(items)
+      tmp << block.call(item)
     end
 
     tmp
   end
 
+  def filter(&block)
+    tmp = []
+    for item in self do
+      tmp << item if block.call(item)
+    end
+
+    tmp
+  end
 end
 
+class Array
+  include ArrayOnSteroid
+end
+
+# Your code ends here.
 
 class WarmupTest < Minitest::Test
   def test_project_is_the_new_map
