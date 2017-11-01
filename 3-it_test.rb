@@ -35,9 +35,18 @@ module ArrayIt
       # end
 
 
-      it_block = ItBlock.new(item)
+      Object.class_eval do
+        define_method(:it) do
+          item
+        end
+      end
 
-      tmp << item if it_block.yield_to(&block)
+      tmp << item if yield block
+
+      Object.class_eval do
+        remove_method(:it)
+      end
+
     end
 
     tmp
