@@ -20,8 +20,12 @@ module ArrayIt
       @it = item
     end
 
-    def yield_to(&block)
-      block.call
+    def run(&block)
+      # use instance_eval to execute the block
+      # in the context of this ItBlock instance
+      # i.e. `self` will be the ItBlock instance
+      instance_eval( &block )
+      # the & above is crucial: it converts the block to a Proc (?)
     end
   end
 
@@ -29,15 +33,9 @@ module ArrayIt
   def filter(&block)
     tmp = []
     for item in self do
-      # Doesn't work:
-      # block.define_singleton_method(:it) do
-      #   item
-      # end
-
-
       it_block = ItBlock.new(item)
 
-      tmp << item if it_block.yield_to(&block)
+      tmp << item if it_block.run(&block)
     end
 
     tmp
