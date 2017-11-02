@@ -4,6 +4,37 @@ require 'minitest/pride'
 
 # You code stars here:
 
+module IftrueFalse
+
+  def if_true(&block)
+    yield block if am_i_truthy?
+    self
+  end
+
+  def if_false(&block)
+    yield block if am_i_falsy?
+    self
+  end
+
+  def am_i_truthy?
+    return true  if self.is_a? TrueClass
+    return false if self.is_a? FalseClass
+    return false if self.nil?
+    true
+  end
+
+
+  def am_i_falsy?
+    return true  if self.is_a? FalseClass
+    return false if self.is_a? TrueClass
+    return true  if self.nil?
+    false
+  end
+
+end
+
+Object.include IftrueFalse
+
 
 # Your code ends here.
 

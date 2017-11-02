@@ -43,9 +43,7 @@ module ArrayIt
 
 end
 
-class Array
-  include ArrayIt
-end
+Array.include ArrayIt
 
 # Your code ends here.
 
