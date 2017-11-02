@@ -2,7 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 
-# You code stars here:
+# You code starts here:
 
 module IftrueFalse
 
@@ -12,7 +12,7 @@ module IftrueFalse
   end
 
   def if_false(&block)
-    yield block if am_i_falsy?
+    yield block if am_i_falsey?
     self
   end
 
@@ -24,7 +24,7 @@ module IftrueFalse
   end
 
 
-  def am_i_falsy?
+  def am_i_falsey?
     return true  if self.is_a? FalseClass
     return false if self.is_a? TrueClass
     return true  if self.nil?

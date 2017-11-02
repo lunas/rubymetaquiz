@@ -7,8 +7,66 @@ require 'minitest/pride'
 #
 #   1. Only use for/while/until or recursion for iteration
 #
-# You code stars here:
+# You code starts here:
 
+module Elukerable
+
+  def _all?(&block)
+    return true if count == 0
+
+    if test(first, block)
+      drop(1)._all?(&block)
+    else
+      false
+    end
+  end
+
+  def _any?(&block)
+    return false if count == 0
+
+    if test(first, block)
+      true
+    else
+      drop(1)._any?(&block)
+    end
+  end
+
+  def _map(&block)
+    return [] if count == 0
+
+    [ block.call(first) ] + drop(1)._map(&block)
+  end
+
+  alias_method :_collect, :_map
+
+  def _count(n = 1, &block)
+    internal_count(0, 0, n, block)
+  end
+
+  def internal_count(iteration_counter, counter, n, block)
+    return counter if count == 0
+
+    new_counter = if iteration_counter % n == 0 && test(first, block)
+                    counter + 1
+                  else
+                    counter
+                  end
+    drop(1).internal_count( iteration_counter + 1, new_counter, n, block)
+  end
+
+  private
+
+  def test(item, block = nil)
+    if block
+      block.call(item)
+    else
+      item
+    end
+  end
+
+end
+
+Object.include Elukerable
 
 # Your code ends here.
 
@@ -39,9 +97,9 @@ class EnumerableTest < MiniTest::Test
 
   def test_count
     ary = [1, 2, 4, 2]
-    assert_equal ary._count, 4
-    assert_equal ary._count(2), 2
-    assert_equal ary._count{ |x| x%2==0 }, 3
+    assert_equal 4, ary._count
+    assert_equal 2, ary._count(2)
+    assert_equal 3, ary._count{ |x| x%2==0 }
   end
 
   def test_detect
