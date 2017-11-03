@@ -15,7 +15,7 @@ module Elukerable
     return true if count == 0
 
     if test(first, block)
-      drop(1)._all?(&block)
+      tail._all?(&block)
     else
       false
     end
@@ -27,14 +27,14 @@ module Elukerable
     if test(first, block)
       true
     else
-      drop(1)._any?(&block)
+      tail._any?(&block)
     end
   end
 
   def _map(&block)
     return [] if count == 0
 
-    [ block.call(first) ] + drop(1)._map(&block)
+    [ block.call(first) ] + tail._map(&block)
   end
 
   alias_method :_collect, :_map
@@ -43,6 +43,7 @@ module Elukerable
     internal_count(0, 0, n, block)
   end
 
+  # Could make this private to hide it and then use `send` here, but that looks ugly.
   def internal_count(iteration_counter, counter, n, block)
     return counter if count == 0
 
@@ -51,8 +52,38 @@ module Elukerable
                   else
                     counter
                   end
-    drop(1).internal_count( iteration_counter + 1, new_counter, n, block)
+    tail.internal_count( iteration_counter + 1, new_counter, n, block)
   end
+
+  def _detect(&block)
+    return nil if count == 0
+
+    if test(first, block)
+      first
+    else
+      tail._detect(&block)
+    end
+  end
+
+  def _drop(n)
+    if n <= 0
+      self
+    else
+      tail._drop(n - 1)
+
+    end
+  end
+
+  def _drop_while(&block)
+    return [] if count == 0
+    if test(first, block)
+      tail._drop_while(&block)
+    else
+      _map{|i| i}  # convert self to an array
+    end
+  end
+
+  alias_method :_find, :_detect
 
   private
 
@@ -64,6 +95,11 @@ module Elukerable
     end
   end
 
+  def tail
+    drop(1)
+    # or, to cheat less:
+    # self[1, -1]
+  end
 end
 
 Object.include Elukerable
