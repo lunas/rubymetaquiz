@@ -66,11 +66,12 @@ module Elukerable
   end
 
   def _drop(n)
-    if n <= 0
+    raise ArgumentError.new("Can't drop negative number") if n < 0
+
+    if n == 0
       self
     else
       tail._drop(n - 1)
-
     end
   end
 
@@ -91,9 +92,11 @@ module Elukerable
   end
 
   def _take(n)
-    return [] if n == 0
+    return [] if n == 0 || count == 0
 
-    [first] + tail.take(n - 1)
+    raise ArgumentError.new("Can't take negative number") if n < 0
+
+    [first] + tail._take(n - 1)
   end
 
   alias_method :_find, :_detect
@@ -176,12 +179,17 @@ class EnumerableTest < MiniTest::Test
   def test_drop
     a = [1, 2, 3, 4, 5, 0]
     assert_equal [4, 5, 0], a._drop(3)
+    assert_equal [], a._drop(6)
+    assert_equal a, a._drop(0)
+    assert_raises(ArgumentError) { a._drop(-1) }
   end
 
   def test_drop_while
     a = [1, 2, 3, 4, 5, 0]
     actual = a._drop_while { |i| i < 3 }
     assert_equal [3, 4, 5, 0], actual
+    assert_equal [], a._drop_while { true }
+    assert_equal a, a._drop_while { false }
   end
 
   def test_each_cons
@@ -203,5 +211,7 @@ class EnumerableTest < MiniTest::Test
     assert_equal [1], a._take(1)
     assert_equal [], a._take(0)
     assert_equal a, a._take(7000)
+    assert_equal a, a._take(5)
+    assert_raises(ArgumentError) { a._take(-1) }
   end
 end
