@@ -83,6 +83,13 @@ module Elukerable
     end
   end
 
+  def _each_cons(n, &block)
+    if n <= count
+      yield take(n)
+      tail._each_cons(n, &block)
+    end
+  end
+
   alias_method :_find, :_detect
 
   private
