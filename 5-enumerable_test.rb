@@ -40,11 +40,11 @@ module Elukerable
   alias_method :_collect, :_map
 
   def _count(n = 1, &block)
-    internal_count(0, 0, n, block)
+    __internal_count(0, 0, n, block)
   end
 
   # Could make this private to hide it and then use `send` here, but that looks ugly.
-  def internal_count(iteration_counter, counter, n, block)
+  def __internal_count(iteration_counter, counter, n, block)
     return counter if count == 0
 
     new_counter = if iteration_counter % n == 0 && test(first, block)
@@ -52,7 +52,7 @@ module Elukerable
                   else
                     counter
                   end
-    tail.internal_count( iteration_counter + 1, new_counter, n, block)
+    tail.__internal_count( iteration_counter + 1, new_counter, n, block)
   end
 
   def _detect(&block)
@@ -85,9 +85,15 @@ module Elukerable
 
   def _each_cons(n, &block)
     if n <= count
-      yield take(n)
+      yield _take(n)
       tail._each_cons(n, &block)
     end
+  end
+
+  def _take(n)
+    return [] if n == 0
+
+    [first] + tail.take(n - 1)
   end
 
   alias_method :_find, :_detect
@@ -103,9 +109,18 @@ module Elukerable
   end
 
   def tail
-    drop(1)
-    # or, to cheat less:
+    # Cheating:
+    # drop(1)
+    # or, to cheat somewhat less:
     # self[1, -1]
+    # otherwise:
+    tmp = []
+    index = 0
+    for item in self do
+      tmp << item if index > 0
+      index += 1
+    end
+    tmp
   end
 end
 
@@ -180,5 +195,13 @@ class EnumerableTest < MiniTest::Test
     assert_equal [6, 7, 8], results[5]
     assert_equal [7, 8, 9], results[6]
     assert_equal [8, 9, 10], results[7]
+  end
+
+  def test_take
+    a = [1, 2, 3, 4, 5]
+    assert_equal [1, 2, 3], a._take(3)
+    assert_equal [1], a._take(1)
+    assert_equal [], a._take(0)
+    assert_equal a, a._take(7000)
   end
 end
